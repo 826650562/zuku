@@ -7,14 +7,18 @@ $(function(){
   function getParentTypeToo(){
 	  $.ajax({
 			type : "POST",
-			url :  window.path+"/home/questParentType",
+			url :  window.path+"/home/questTypeById",
 			async : false,
 			cache : false,
+			   data : {
+					_id : 0
+				}, 
 			contentType : "application/x-www-form-urlencoded",
 			success : function(data) {
 				var res = JSON.parse(data);
+				
 				for(var i =0;i<res.length;i++){
-					$(".parent-menu"). append("<li><a _id="+res[i].ID+" class='ptcgJsItem'>"+ res[i]. CLASS_NAME +"</a></li>");
+					$(".parent-menu"). append("<li><a _id="+res[i].ID+" class='parentContent'>"+ res[i]. CLASS_NAME +"</a></li>");
 				}
 			},
 			error : function(data) {
@@ -23,13 +27,14 @@ $(function(){
 		});
 
   }
-  
-  function getChildTypeToo(){
-	  $(".parent-menu").unbind().click(function(){
+   
+  function getfirstChildTypeToo(){
+	  $(".parentContent").unbind().click(function(){
+		  $('.parenttitle').text($(this).text());
 		  var id = $(this).attr("_id");
 		  $.ajax({
 				type : "POST",
-				url :  window.path+"/home/questchildType",
+				url :  window.path+"/home/questTypeById",
 				async : false,
 				cache : false,
 			    data : {
@@ -40,36 +45,109 @@ $(function(){
 					$('.firstchild-menu').html('');
 					var res = JSON.parse(data);
 					console.log(res);
-					for(var i =0;i<res[0].length;i++){
-						$(".firstchild-menu"). append("<li><a _id="+res[i].ID+" class='ptcgJsItem'>"+ res[i]. CLASS_NAME +"</a></li>");
-					}
-//				 	for(var j in res[1]){
-//						if(j){
-//						$(".Cchild").each(function(index,item){
-//							var child_id=$(item).attr("child_id");
-//							if(child_id==j){
-//								var len = res[1][j].length-1;
-//								res[1][j].map(function(citem,index){
-//									$(item).append("<span class='fenleidetail'><a href='#'>"+citem.CLASS_NAME+"</a></span>");
-//								})
-//							}
-//						});	
-//						}
-//					}  
 					
+					for(var i=0;i<res.length;i++){
+						$(".firstchild-menu"). append("<li><a class='firstchild' fchild_id="+res[i].ID+">"+ res[i]. CLASS_NAME +"</a></li>");
+					}
+					
+					$('.firstchild').unbind().click(function(){
+						$('.firstchildtitle').text($(this).text());
+						var id = $(this).attr("fchild_id");
+						  $.ajax({
+								type : "POST",
+								url :  window.path+"/home/questTypeById",
+								async : false,
+								cache : false,
+								data : {
+									_id : id
+								}, 
+								contentType : "application/x-www-form-urlencoded",
+								success : function(data) {
+									var res = JSON.parse(data);
+									console.log(res);
+									for(var i =0;i<res.length;i++){
+										$(".secondchild-menu"). append("<li><a schild_id="+res[i].ID+" class='secondchild'>"+ res[i]. CLASS_NAME +"</a></li>");
+									}
+									
+									$('.secondchild').unbind().click(function(){
+										$('.secondchildtitle').text($(this).text());
+									})
+								},
+								error : function(data) {
+									console.log("error:" + data.responseText);
+								}
+							});
+					})			
 				},
 				error : function(data) {
 					console.log("error:" + data.responseText);
 				}
-			});
-		 
-		  $("#firstChildType").css({'display': 'block'});	  
+			});  
 	  })
   
   }
   
+/*  function uploadRFAfiles(){
+	  $("#uploadRFA").click(function(){
+		  var formData = new FormData();
+		  formData.append('file', $('#file')[0].files[0]);
+		  $.ajax({
+			   url: window.path+"/myUpload/uploadRFAfile",  
+		      type: 'POST',
+		      cache: false,
+		      data: formData,
+		      processData: false,
+		      contentType: false
+		  }).done(function(res) {}).fail(function(res) {});
+	  }) 
+  }*/
+  
+function uploadIMGfiles(){
+	  var formData = new FormData();
+	  /*formData.append('file', [$('#imgfile')[0].files[0],$('#file')[0].files[0]]);*/
+	  formData.append('imgfile',$('#imgfile')[0].files[0]);
+	  formData.append('rfafile',$('#file')[0].files[0]);
+	  $.ajax({
+		  url: window.path+"/myUpload/uploadIMGfile",  
+	      type: 'POST',
+	      cache: false,
+	      data: formData,
+	      processData: false,
+	      contentType: false
+	  }).done(function(res) {}).fail(function(res) {});
+  }
+function uploadBaseInfo(){
+	  $("#uploadINFO").click(function(){
+		  $.ajax({
+			  url: window.path+"/myUpload/questFORM",
+		      type: 'POST',
+		      cache: false,
+		      data: {
+		    	  _name:$("#inputNAME").val(),
+		    	  _version:$("#inputVERSION").val(),
+		    	  _sign:$("#inputSIGN").val(),
+		      },
+		      success:function(res){
+		    	  if(res=='uploadSuccess'){
+		    		  uploadIMGfiles();
+		    	  }
+		      },
+		      error:function(e){
+		    	  
+		      }
+		  }) 
+	  }) 
+	  
+	  
+}
+
+  
   /*渲染子类及孙类数据*/
   getParentTypeToo(); //获取父类
-  getChildTypeToo();//获取崽崽和孙子类
-	
+  getfirstChildTypeToo();//获取崽崽和孙子	
+  //uploadRFAfiles(); //上传rfa构件
+  uploadIMGfiles(); //上传构件缩略图
+  uploadBaseInfo();/*上传构件的信息*/
+  //上传其他
+  
 })

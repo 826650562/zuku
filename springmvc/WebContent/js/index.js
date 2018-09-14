@@ -3,20 +3,18 @@ $(function(){
   function getParentType(){
 	  $.ajax({
 			type : "POST",
-			url :  window.path+"/home/questParentType",
+			url :  window.path+"/home/questTypeById",
 			async : false,
 			cache : false,
-		/*	data : {
-				_id : tag_id
-			},*/
+			data : {
+				_id : 0
+			},
 			contentType : "application/x-www-form-urlencoded",
 			success : function(data) {
 				var res = JSON.parse(data);
-//				var parentTypeName = [];
 				for(var i =0;i<res.length;i++){
 					$(".parentType"). append("<a _id="+res[i].ID+" class='ptcgJsItem'>"+ res[i]. CLASS_NAME +"</a>");
 				}
-//				$(".parentType"). append("<a class='ptcgJsItem'>"+ res +"</a>");
 			},
 			error : function(data) {
 				console.log("error:" + data.responseText);

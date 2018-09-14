@@ -42,6 +42,11 @@ public class homeController {
 		return "pages/index";
 	}
 	
+	@RequestMapping(value = "/indexTest")
+	public String indexTest(HttpServletRequest req,HttpServletResponse reponse) {
+		return "pages/indexTest";
+	}
+	
 	
 	/**
 	 * @param req
@@ -65,14 +70,16 @@ public class homeController {
 		return "pages/upload";
 	}
 	
+ 
+	
 	/*
-	 * 请求大类数据 填充页面
+	 * 通过id获取子分类
 	 * */
 	
-	@RequestMapping(value = "/questParentType")
-	public void questParentType(HttpServletRequest req,HttpServletResponse reponse) {
-		String parentId =  "select * from t_zuku_classify where PARENT_ID = '0'";
-		
+	@RequestMapping(value = "/questTypeById")
+	public void questTypeById(HttpServletRequest req,HttpServletResponse reponse) {
+		String id=req.getParameter("_id");
+		String parentId =  "select * from t_zuku_classify where PARENT_ID = '"+id+"'";
 		 List parentIdList = this.mapService.getListBySql(parentId);
 		    JSONArray json = JSONArray.fromObject(parentIdList);
 		     try {
@@ -82,6 +89,10 @@ public class homeController {
 				e1.printStackTrace();
 			}
 	}
+	
+	
+	
+	
 	
 	/*
 	 * 获取大类的子类 及子类的分类
@@ -104,6 +115,8 @@ public class homeController {
 			 res.put(cid, childcList);
 		 }
 		 
+	   //	 建筑  8个子类     再把这个8个子类的  各个子类拿到
+		 
 		 List resList=new ArrayList();
 		 
 		 resList.add(childList);
@@ -117,6 +130,9 @@ public class homeController {
 				e1.printStackTrace();
 			}
 	}
+	 
+	
+	
 	
 	
  

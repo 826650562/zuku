@@ -34,6 +34,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 }
 
 </style>
+<script type="text/javascript">
+$(function(){
+   var num=30;
+   var Len=$(".dataItemTxtsmall").text().length;
+   if(Len>num){
+	   $(".dataItemTxtsmall").text($(".dataItemTxtsmall").text().substring(0,num)+"...");
+	} 	  
+})
+
+</script>
 </head>
 <body>
 

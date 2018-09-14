@@ -1,0 +1,129 @@
+*{padding:0px;margin:0px;}
+ul{padding:0px;margin:0px;}
+li{list-style:none;}
+a{color:#333; text-decoration:none;}
+a:hover{color:#000;}
+img{border:none;}
+body{font-size:13px; font-family:'Microsoft Yahei';}
+input{font-family:'Microsoft Yahei';}
+
+/* index.css */
+.top{width:100%;height:80px; float:left; position:relative; background:url(../images/topbg.png) repeat-x;}
+.logobg{width:438px;height:80px; background:url(../images/logobg.png) no-repeat; position:absolute; z-index:10; top:0px; left:0px;}
+.imgbg{width:521px;height:80px; float:right; background:url(../images/imgbg.png) no-repeat; position:absolute; z-index:5; top:0px; right:0px;}
+
+
+
+
+
+
+
+
+
+/*-----------historyChatQueryBox-----------*/
+.historyChatQueryBox{width:350px;height:100%; background:#fff;float: left; } 
+
+.HistoryChatTopFixed{width:350px; height:160px; position:fixed; top:80px;left:0px; background:#fff;}
+.historyChatQueryTitle{width:350px;height:35px; float:left; cursor:move;}
+.historyChatQueryTitle .myText{color:#22292c;font-size:14px;height:35px; line-height:35px; float:left;padding:0px 12px 0px 12px;width:250px; overflow:hidden;}
+.historyChatQueryLine{width:350px;height:2px; float:left; background:#f7971e;} 
+.historyChatQuerySearch{width:330px; height:123px; float:left;padding:0px 10px 0px 10px;}
+.historyChatQuerySearch .timeInputBox{width:330px; float:left; height:40px;}
+.historyChatQuerySearch .timeLaberl{width:80px;float:left; height:40px; line-height:40px; overflow:hidden;}
+.historyChatQuerySearch .timeInput{width:250px;float:left; height:30px; line-height:40px;padding:5px 0px 5px 0px;}
+.historyChatQuerySearch .timeTxt{width:228px;float:left; padding:0px 10px 0px 10px; height:28px; line-height:28px;border:1px solid #ddd; cursor:pointer;}
+.historyChatQuerySearch .searchBox{width:330px; float:left; height:40px;}
+.historyChatQuerySearch .searchInput{width:250px;float:left; height:30px; line-height:30px;padding:5px 0px 5px 0px;}
+.historyChatQuerySearch .searchBtnBox{width:60px;float:left; height:30px; line-height:30px;padding:5px 0px 5px 10px;}
+.historyChatQuerySearch .searchBtn{width:70px;height:30px; line-height:30px; background:#f7971e;color:#fff; text-align:center;border:none; cursor:pointer;font-size:14px;}
+
+.searchBtns{width:120px;height:30px; line-height:30px; background:#f7971e;color:#fff; text-align:center;border:none; cursor:pointer;font-size:14px;}
+
+.contactPeoList{width:350px;/**** height:440px; ******/float:left;  padding-bottom:60px; padding-top:160px;}
+.contactPeoList ul{padding:0px;margin:0px;}
+.contactPeoList ul li{width:350px; height:60px; float:left;}
+.contactPeoListImg{width:40px;height:40px; float:left;padding:10px;}
+.contactPeoListImg img{width:40px;height:40px; float:left;}
+.contactZuName{width:280px;height:60px; line-height:60px;color:#666; font-size:14px; float:left; overflow:hidden;}
+.contactPeoName{width:70px;height:60px; line-height:60px;color:#666; font-size:14px; float:left; overflow:hidden;}
+.peoImgAndName{width:143px;height:60px; float:left;}
+
+.rightContactPeoName{width:70px;height:60px; line-height:60px;color:#666; font-size:14px; float:right; overflow:hidden; text-align:right;}
+.rightPeoImgAndName{width:143px;height:60px; float:right;}
+.rightContactPeoListImg{width:40px;height:40px; float:right;padding:10px;}
+.contactArrowXtb{width:60px;height:60px; float:left;}
+
+.pageBox{width:350px;height:48px; position:fixed; z-index:100; bottom:0px; left:0px; background:#fff;border-top:1px solid #ddd;}
+.pageLeft{width:160px;height:20px; padding:14px; float:left;}
+.pageLeft ul{height:20px; float:left;}
+.pageLeft ul li{ height:20px; width:20px; float:left; text-align:center; font-size:14px; margin-right:10px;}
+.pageLeft ul li a{ height:20px; width:20px; float:left; display:block;}
+.pageLeft ul li a:hover{ height:20px; width:20px; float:left; display:block; background:#eee; border-radius:2px;}
+.pageRight{width:120px; padding:14px; height:20px; line-height:20px; text-align:right; float:right; overflow:hidden;}
+.jpLiHover{background:#f3f3f3; cursor:pointer;}
+
+
+
+
+/*------------layerHistoryDetailed start-----------*/
+.layerHistoryDetailed{width:100%; float:left; padding-bottom:60px;}
+.historyDetailedTitle{width:100%;height:35px; float:left; position:fixed; top:80px;left:368px; border-bottom:2px solid #f7971e; background:#fff;}
+.historyDetailedTitle .myText{color:#22292c;font-size:14px;height:35px; line-height:35px; float:left;padding:0px 12px 0px 12px;width:250px; overflow:hidden;}
+.historyDetailedTitle .HideXtb{width:14px;height:14px; float:right; padding:10px; cursor:pointer;}
+
+.historyChatList{width:100%;  float:left;outline:none; padding-top:40px;}
+.historyChatList ul{padding:0px;margin:0px; float:left;}
+.historyChatList ul li{ float:left;width:100%; float:left; margin:5px 0px 5px 0px;}
+.historyChatList ul li .peoInfo{width:100%; height:30px; line-height:30px; float:left;}
+.historyChatList ul li .peoName{ max-width:100px;height:30px; line-height:30px; float:left; overflow:hidden;padding:0px 12px 0px 12px;}
+.historyChatList ul li .historyChatTime{float:left;height:30px; line-height:30px;color:#999;}
+.historyChatInfo{padding:0px 12px 0px 50px; line-height:22px; float:left;}
+.historyLocation{width:39px;height:33px; float:left;}
+.historyLocation img{cursor:pointer;}
+.historyAudio{width:39px;height:33px; float:left;}
+.historyAudioTime{height:33px; line-height:33px; float:left;padding:0px 10px 0px 10px;}
+.historyAudio img{cursor:pointer;}
+.historyManyImgInfo{padding:0px 12px 0px 50px;  float:left;}
+.historyManyImgInfo span{width:50px;height:50px; padding:0px 7px 7px 0px; float:left;}
+.historyManyImgInfo span img{cursor:pointer;}
+.historyOneImgInfo{padding:0px 12px 0px 50px;  float:left;}
+.historyOneImgInfo img{width:120px;height:80px; cursor:pointer;}
+
+.pageDetailBox{width:100%;height:48px; position:fixed; z-index:100; bottom:0px;left:368px; right:0px; background:#fff;border-top:1px solid #ddd;}
+.pageDetailBox .pageLeft{width:160px;height:20px; padding:14px; float:left;}
+.pageDetailBox .pageLeft ul{height:20px; float:left;}
+.pageDetailBox .pageLeft ul li{ height:20px; width:20px; float:left; text-align:center; font-size:14px; margin-right:10px;}
+.pageDetailBox .pageLeft ul li a{ height:20px; width:20px; float:left; display:block;}
+.pageDetailBox .pageLeft ul li a:hover{ height:20px; width:20px; float:left; display:block; background:#eee; border-radius:2px;}
+.pageDetailBox .pageRight{width:120px; padding:14px; height:20px; line-height:20px; text-align:right; float:right; overflow:hidden;}
+.pageDetailBox .jpLiHover{background:#f3f3f3; cursor:pointer;}
+
+/*------------upload.jsp start-----------*/
+
+.upload-icon {
+	font-size: 300px;
+    /* width: 300px; */
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 35px;
+    margin-bottom: 35px;
+}
+
+.btn-style {
+	background: #f2dede;
+    color: white;
+    display: block;
+    height: 50px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.menu-container {
+    width: 100%;
+    height: 300px;
+}
+.btnGroup {
+	position: relative;
+    display: inline-block;
+    float: left;
+}
