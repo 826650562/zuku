@@ -92,6 +92,10 @@ $(function(){
            type: "POST",
            url: window.path+"/home/getContent",
            dataType: "json",
+           data:{
+        	   pageSize:20,
+           		pageIndex:1
+           },
            success: function(data){
 						console.log(data);
 						
@@ -118,10 +122,63 @@ $(function(){
        });
   }
   
+  //实现首页分页功能
+  function pageinationchange(){
+	  $(function () {
+	        var demo1 = BootstrapPagination($("#demo1"), {
+	            //记录总数。
+	            total: 101,
+	            //当前页索引编号。从其开始（从0开始）的整数。
+	            pageIndex: 0,
+	            //当分页更改后引发此事件。
+	            pageChanged: function (pageIndex, pageSize) {
+	                /*alert("page changed. pageIndex:" + pageIndex + ",pageSize:" + pageSize)*/
+	            	/*alert("page changed. pageIndex:" + pageIndex + ",pageSize:" + 15)*/
+	            	$.ajax({
+	    	            type: "POST",
+	    	            url: window.path+"/home/getContent",
+	    	            dataType: "json",
+	    	            data: {
+	    	            	pageSize:pageSize,
+	    	            	pageIndex:Number(pageIndex)+1,
+	    	            	
+	    	            },
+	    	            success: function(data){
+	    	 						console.log(data);
+	    	 						$(".dataitemcont").html('');
+	    	 						for(var i =0;i<data.length;i++){
+	    	 							var html = '<div class="dataitemouter">'
+	    	 								 
+	    	 							    +'<div class="col-lg-12 dataimg">'
+	    	 							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
+	    	 							    +'</div>'
+
+	    	 							    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
+	    	 							    +'<div class="col-lg-12 text-center">'
+	    	 							      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
+	    	 							    +'</div>'
+
+	    	 							+'</div>';
+	    	 							$(".dataitemcont"). append(html);
+	    	 							$('.rfadetail').unbind().click(function(){
+	    	 								var id=$(this).attr('data-id');
+	    	 					            window.location.href= window.path +'/home/homedetail?id='+id;
+	    	 							})
+	    	 						}
+	    	                     }
+	    	        });
+	            },
+	        });
+	        
+	        
+	    });
+  }
+  
   
   
   getParentType(); //获取父类
   parentClick(); //执行父类点击事件
   showimglist(); //显示前端列表
+  pageinationchange(); //分页功能
 	
 })
