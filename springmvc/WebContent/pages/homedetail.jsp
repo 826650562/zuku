@@ -4,6 +4,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -15,7 +16,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css">
 <link href="<%=path %>/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
 <script src="<%=path %>/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script>
+ window.path="<%=path %>";
+ 
+ 
+</script>
 <script type="text/javascript" src="<%=path %>/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=path %>/js/homedetail.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -80,22 +87,33 @@ $(function(){
 <div class="col-lg-12 zxgd">
 
 <div class="z-row ddailmiaoshu">
-  <div class="ddailbzimg"><img src="<%=path %>/images/data1detailimg1.png"></div>
+
+
+ <c:forEach var="content"  items="${contentList}"> 
+ 
+  <div class="ddailbzimg"><img src="<%=path %>/rfa-img/<c:out value="${content.SLT_PATH}"/>"></div>
   <div class="z-col padLR25">
-     <div class="row">
-       <div class="col-lg-12"><div class="ddailtitle">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div></div>
+  
+    
+   
+    <div class="row">
+       <div class="col-lg-12 rfatitle"><div class="ddailtitle"><c:out value="${content.NAME}"/></div></div>
        <div class="col-lg-12">
            <div class="ddailtxtcont">
-              <span>Revit版本：</span>2014<br/>
-              <span>大小：</span>276.03KB<br/>
-              <span>专业：</span>暖通<br/>
-              <span>分类：</span>空气处理设备/风机盘管<br/>
-              <span>标签：</span>
+              <span>Revit版本：</span><c:out value="${content.VERSION}"/><br/>
+              <span>大小：</span><c:out value="${content.SIZE_}"/><br/>
+              <span>专业：</span><c:out value="${content.NAME}"/><br/>
+              <span>分类：</span><c:out value="${content.CLASSIFY}"/><br/>
+              <span>标签：</span><c:out value="${content.SIGN}"/>
            </div>
+           <button class="btn btn-success"> <a href="<%=basePath %>rfa/<c:out value="${content.RFA_PATH}"/>" download="rfa构件文件">下载rfa构件文件</a></button>
          </div>
      </div>
+  
   </div>
 </div>
+   
+</c:forEach>
 
 <div class="cgdtltabcont">
 

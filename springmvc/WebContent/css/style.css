@@ -110,8 +110,8 @@ footer{ background:#f6f8fb; padding:20px 0px; text-align:center;}
 /*------数据服务 start-------*/
 .ptcgJsItem { height: 28px; line-height: 26px; border-radius:30px; padding:0px 15px; float: left; margin:5px; cursor:pointer;}
 .ptcgJsItemActive { color: #6eb92b; border:1px solid #6eb92b;}
-.dataitemcont{padding:15px 7px 0px 7px;}
-.dataitemouter{transition: all .5s; border:1px solid #eee; height:260px; position:relative; overflow: hidden;}
+.dataitemcont{padding:15px 7px 0px 7px;width:100%;display: inline-block;}
+.dataitemouter{transition: all .5s; border:1px solid #eee; height:260px; position:relative; overflow: hidden;width:19%; display: inline-block;margin-left: 13px;}
 .dataimg{ text-align:center;}
 .dataimg img{width:110px; height:110px;transition: all .5s;}
 .dataItem { background: #fff; position:absolute; top:0px; left:0px; overflow: hidden;z-index:120; transition: all .5s; width:100%; padding:20px 0px 0px 0px;}

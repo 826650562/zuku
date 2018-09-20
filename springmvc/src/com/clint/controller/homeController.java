@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clint.service.MapService;
@@ -55,7 +56,14 @@ public class homeController {
 	 * 返回详情页面
 	 */
 	@RequestMapping(value = "/homedetail")
-	public String homedetail(HttpServletRequest req,HttpServletResponse reponse) {
+	public String homedetail(HttpServletRequest req,HttpServletResponse reponse,Model model) {
+		String id=req.getParameter("id");
+		if(id!=null){    
+			String allContent =  "select * from T_ZUKU_DETAIL WHERE ID = '"+id+"'";
+			List contentList = this.mapService.getListBySql(allContent);
+			model.addAttribute("name", "liusha");
+			model.addAttribute("contentList", contentList);
+		}
 		return "pages/homedetail";
 	}
 	
@@ -90,8 +98,21 @@ public class homeController {
 			}
 	}
 	
-	
-	
+	/*
+	 * 		将数据库里面获取的数据显示到前台
+	 * */
+	@RequestMapping(value = "/getContent")
+	public void getContent(HttpServletRequest req,HttpServletResponse reponse) {
+		String allContent =  "select * from T_ZUKU_DETAIL";
+		 List contentList = this.mapService.getListBySql(allContent);
+		    JSONArray json = JSONArray.fromObject(contentList);
+		     try {
+			  PrintWriter  pw =	reponse.getWriter();
+			  pw.write(String.valueOf(json));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	}
 	
 	
 	/*

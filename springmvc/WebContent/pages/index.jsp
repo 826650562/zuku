@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 <script src="<%=path %>/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="<%=path %>/js/index.js"></script>
+<script src="<%=path %>/js/homedetail.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,122 +95,11 @@ $(function(){
 </div>
 
 <div class="container-fluid">
-<div class="container">
-<div class="row">
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
+	<div class="container">
+		<div class="col-lg-2 dataitemcont"></div>
+	</div>
 </div>
-</div>
-<!---->
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
-</div>
-</div>
-<!---->
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
-</div>
-</div>
-<!---->
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
-</div>
-</div>
-<!---->
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
-</div>
-</div>
-<!---->
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=path %>/images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="<%=path %>/home/homedetail" target ="_blank" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
-</div>
-</div>
-<!---->
+
 <div class="col-lg-12">
 <div class="pagebox">
     <a class="prev disable hide" href="javascript:;"><i class="fa fa-angle-left"></i></a>
@@ -223,10 +113,6 @@ $(function(){
     <a class="next" href="javascript:;">&nbsp;<i class="fa fa-angle-right"></i></a>
     </div>
 </div>
-</div>
-</div>
-</div>
-
 <footer>
 <div class="container">
   <div class="row">

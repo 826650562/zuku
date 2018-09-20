@@ -70,60 +70,51 @@ public class uploadController {
 	 * 上传构件缩略图
 	 */
 	@RequestMapping(value = "/uploadIMGfile")
-	/*public String uploadIMGfile(@RequestParam("file") MultipartFile[] uploadFile, HttpSession session) throws IOException {
-		if (uploadFile.length > 0) {   
-			String filename="";
-			String leftPath="";
-			for(int i=0;i<uploadFile.length;i++){
-				filename=uploadFile[i].getOriginalFilename();
-				if (filename.endsWith("jpg")|| filename.endsWith("png")) {
-					 leftPath = session.getServletContext().getRealPath("/rfa-img");
-				}
-				if(filename.endsWith("rfa")){
-					 leftPath = session.getServletContext().getRealPath("/rfa");
-				}
-				File file = new File(leftPath, filename);
-				if (!file.getParentFile().exists()) {
-					file.getParentFile().mkdirs();
-				}
-				uploadFile[i].transferTo(file);
-			}
-		
-		} else {
-			return "error";
-		}
-		return "uploadSuccess";
-	}*/
-	public String uploadMult(HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException {
+	public String uploadMult(HttpServletRequest request, HttpSession session,HttpServletResponse reponse) throws IllegalStateException, IOException {
         // 转型为MultipartHttpRequest：   
        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;   
        // 获得文件：   
        
        List<MultipartFile> files = new ArrayList<MultipartFile>();
-      /*
-       files.add((MultipartFile) multipartRequest.getFiles("imgfile"));
-       files.add((MultipartFile) multipartRequest.getFiles("rfafile"));*/
        
        List<MultipartFile> files1 = multipartRequest.getFiles("imgfile");
        List<MultipartFile> files2 = multipartRequest.getFiles("rfafile");
        
-       files.add(files1.get(0));
-       files.add(files2.get(0));
+       MultipartFile f1=files1.get(0);
+       MultipartFile f2=files2.get(0);
        
+       if(f1 !=null){
+    	   files.add(f1);  
+       }
+       
+       if(f2 !=null){
+    	   files.add(f2);  
+       }
+      
        if (files.isEmpty()) {
            return "false";
        }
        
 	   String leftPath="";
+	   String temperimgpath = "";
+	   String temperrfapath = "";
+	   String temperimgname = "";
+	   String temperrfaname = "";
+	   
 
        for (MultipartFile file : files) {
            String fileName = file.getOriginalFilename();
            
             if (fileName.endsWith("jpg")|| fileName.endsWith("png")) {
 				 leftPath = session.getServletContext().getRealPath("/rfa-img");
+				 temperimgpath =leftPath;  //路径
+				 temperimgname = fileName; //名称
+				 
 			}
 			if(fileName.endsWith("rfa")){
 				 leftPath = session.getServletContext().getRealPath("/rfa");
+				 temperrfapath = leftPath; //路径
+				 temperrfaname = fileName; //名称
 			}
 			
 			File filetest = new File(leftPath, fileName);
@@ -133,7 +124,22 @@ public class uploadController {
 			file.transferTo(filetest);
 
        }
+      
+       //将图片路径与rfa文件路径存入数据库
+       String uuid=(String) request.getSession().getAttribute("uuid");
+       String filesql = "update T_ZUKU_DETAIL  SET RFA_PATH = '"+temperrfaname+"',SLT_PATH = '"+temperimgname+"' WHERE ID = '"+uuid+"'";
+       System.out.println("执行到这啦");
+       try{
+			this.mapService.execute(filesql);
+			reponse.getWriter().write("uploadSuccess");
+		}catch(Exception e){
+			reponse.getWriter().write(e.toString());
+		}
+       
        return "true";
+       
+       
+       
    }
 	
 	/*
@@ -141,14 +147,17 @@ public class uploadController {
 	 * */
 	
 	@RequestMapping(value = "/questFORM")
-	public void questFORM(HttpServletRequest req,HttpServletResponse reponse) throws IOException {
+	public void questFORM(HttpServletRequest req,HttpServletResponse reponse,HttpSession httpSession) throws IOException {
 		String RFAname = req.getParameter("_name");
 		String RFAversion = req.getParameter("_version");
 		String RFAsign = req.getParameter("_sign");
 		String uuid=UUID.randomUUID().toString();
+		
 		String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN) values('"+uuid+"','"+RFAname+"','"+RFAversion+"','"+RFAsign+"')";
 		try{
 			this.mapService.execute(Info);
+			req.getSession().setAttribute("uuid", uuid);
+			
 			reponse.getWriter().write("uploadSuccess");
 		}catch(Exception e){
 			reponse.getWriter().write(e.toString());

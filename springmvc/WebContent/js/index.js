@@ -63,7 +63,16 @@ $(function(){
 								}
 							});	
 							}
-						}  
+						}
+					 	//调取数据库中上传文件及内容
+					 	/*$.ajax({
+				             type: "POST",
+				             url: window.path+"/home/getContent",
+				             dataType: "json",
+				             success: function(data){
+				                        console.log(data);
+				                      }
+				         });*/
 						
 					},
 					error : function(data) {
@@ -76,8 +85,43 @@ $(function(){
 	  })
   }
   
+  //显示前端列表
+  function showimglist(){
+	//调取数据库中上传文件及内容
+	 	$.ajax({
+           type: "POST",
+           url: window.path+"/home/getContent",
+           dataType: "json",
+           success: function(data){
+						console.log(data);
+						
+						for(var i =0;i<data.length;i++){
+							var html = '<div class="dataitemouter">'
+								 
+							    +'<div class="col-lg-12 dataimg">'
+							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
+							    +'</div>'
+
+							    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
+							    +'<div class="col-lg-12 text-center">'
+							      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
+							    +'</div>'
+
+							+'</div>';
+							$(".dataitemcont"). append(html);
+							$('.rfadetail').unbind().click(function(){
+								var id=$(this).attr('data-id');
+					            window.location.href= window.path +'/home/homedetail?id='+id;
+							})
+						}
+                    }
+       });
+  }
+  
+  
   
   getParentType(); //获取父类
   parentClick(); //执行父类点击事件
+  showimglist(); //显示前端列表
 	
 })

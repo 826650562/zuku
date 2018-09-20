@@ -87,24 +87,8 @@ $(function(){
   
   }
   
-/*  function uploadRFAfiles(){
-	  $("#uploadRFA").click(function(){
-		  var formData = new FormData();
-		  formData.append('file', $('#file')[0].files[0]);
-		  $.ajax({
-			   url: window.path+"/myUpload/uploadRFAfile",  
-		      type: 'POST',
-		      cache: false,
-		      data: formData,
-		      processData: false,
-		      contentType: false
-		  }).done(function(res) {}).fail(function(res) {});
-	  }) 
-  }*/
-  
 function uploadIMGfiles(){
 	  var formData = new FormData();
-	  /*formData.append('file', [$('#imgfile')[0].files[0],$('#file')[0].files[0]]);*/
 	  formData.append('imgfile',$('#imgfile')[0].files[0]);
 	  formData.append('rfafile',$('#file')[0].files[0]);
 	  $.ajax({
@@ -118,6 +102,9 @@ function uploadIMGfiles(){
   }
 function uploadBaseInfo(){
 	  $("#uploadINFO").click(function(){
+		  /*if($('.control-label').val()!="" && $('.control-label').val()!= undefined){
+			  
+		  }*/
 		  $.ajax({
 			  url: window.path+"/myUpload/questFORM",
 		      type: 'POST',
@@ -136,17 +123,13 @@ function uploadBaseInfo(){
 		    	  
 		      }
 		  }) 
-	  }) 
-	  
-	  
+	  }) 	  
 }
 
   
   /*渲染子类及孙类数据*/
   getParentTypeToo(); //获取父类
   getfirstChildTypeToo();//获取崽崽和孙子	
-  //uploadRFAfiles(); //上传rfa构件
-  uploadIMGfiles(); //上传构件缩略图
   uploadBaseInfo();/*上传构件的信息*/
   //上传其他
   
