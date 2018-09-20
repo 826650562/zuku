@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
 <title>族库</title>
 <link href="<%=path %>/js/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css">
