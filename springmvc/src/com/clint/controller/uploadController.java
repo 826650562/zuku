@@ -152,7 +152,6 @@ public class uploadController {
 		String RFAname = req.getParameter("_name");
 		String RFAversion = req.getParameter("_version");
 		String RFAsign = req.getParameter("_sign");
-<<<<<<< HEAD
 		String thirdTypeId = req.getParameter("thirdTypeId");
 		String rfaName = req.getParameter("rfaName");
 		String imgName = req.getParameter("imgName");
