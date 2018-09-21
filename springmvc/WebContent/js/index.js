@@ -96,10 +96,23 @@ $(function(){
            url: window.path+"/home/getContent",
            dataType: "json",
            success: function(data){
-						console.log(data);
-						
+						$('#listBox').html('');
 						for(var i =0;i<data.length;i++){
-							var html = '<div class="dataitemouter">'
+							var html = '<div class="col-lg-2 dataitemcont">'
+								+'<div class="dataitemouter">'
+							 +'<div class="dataItem">'
+							 +'<div class="row">'
+							    +'<div class="col-lg-12 dataimg">'
+							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
+							    +'</div>'
+							 +'</div>'
+							 +'<div class="row">'
+							    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
+							    +'<div class="col-lg-12 text-center">'
+							     +' <a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
+							    +'</div></div></div></div></div>'
+							    $('#listBox').append(html);
+							/*var html = '<div class="dataitemouter">'
 								 
 							    +'<div class="col-lg-12 dataimg">'
 							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
@@ -110,8 +123,8 @@ $(function(){
 							      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
 							    +'</div>'
 
-							+'</div>';
-							$(".dataitemcont"). append(html);
+							+'</div>';*/
+							//$(".dataitemcont"). append(html);
 							$('.rfadetail').unbind().click(function(){
 								var id=$(this).attr('data-id');
 					            window.location.href= window.path +'/home/homedetail?id='+id;

@@ -77,23 +77,44 @@ $(function(){
     </div>
 </div>
 </div>
-<div class="container-fluid padT15">
+<div class="container-fluid">
+<div class="container">
+<div class="row"  id="listBox">
+<!---->
+<div class="col-lg-2 dataitemcont">
+<div class="dataitemouter">
+ <div class="dataItem">
+ <div class="row">
+    <div class="col-lg-12 dataimg">
+      <img src="<%=basePath %>images/mximg1.png">
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
+    <div class="col-lg-12 text-center">
+      <a href="datadetail.html" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
+    </div>
+ </div>
+ </div>
+</div>
+</div>
+<!---->
+</div>
+</div>
+</div>
+<!-- <div class="container-fluid padT15">
 <div class="container padLR7" id="firstChildType">
-<!-- 待会删 -->
+待会删
 <div class="row">
-  <div class="col-lg-12 fenlei">
- 
-   
-  
-   
+  <div class="col-lg-12 fenlei"> 
   </div>
   <div class="col-lg-12">
-     <div class="z-row togglebtnbox"><div class="z-col"><a class="btn btn-default togglebtn">点击展开<i class="fa fa-caret-down fa-fw"> </i></a></div></div><!------切换按钮------>
+     <div class="z-row togglebtnbox"><div class="z-col"><a class="btn btn-default togglebtn">点击展开<i class="fa fa-caret-down fa-fw"> </i></a></div></div>----切换按钮----
   </div> 
 </div>
-<!-- 待会删 -->
+待会删
 </div>
-</div>
+</div> -->
 
 <div class="container-fluid">
 	<div class="container">
