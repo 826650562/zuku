@@ -103,6 +103,7 @@ public class homeController {
 	 * */
 	@RequestMapping(value = "/getContent")
 	public void getContent(HttpServletRequest req,HttpServletResponse reponse) {
+		String id=req.getParameter("_id"); //父类id
 		String pageSize=req.getParameter("pageSize");//数据条数
 		String pageIndex=req.getParameter("pageIndex");//页码
 //		String allContent =  "select * from T_ZUKU_DETAIL";
@@ -110,6 +111,8 @@ public class homeController {
 		int pageSizeInt = Integer.parseInt(pageSize);
 		int startInt = (page-1)*pageSizeInt;
 		int endInt = pageSizeInt*page;
+//		读取父类id下属所有子类id
+		
 		/*String allContent = "SELECT * FROM  (  SELECT A.*  FROM (SELECT * FROM t_zuku_detail) A  WHERE ROWNUM <= "+endInt+"  )  WHERE ROWNUM  >= "+startInt+"";*/
 		String allContent = "select a1.* from (select t_zuku_detail.*,rownum rn from t_zuku_detail where rownum <="+endInt+") a1 where rn >="+startInt;
 		List contentList = this.mapService.getListBySql(allContent);

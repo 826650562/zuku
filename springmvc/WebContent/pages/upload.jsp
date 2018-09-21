@@ -49,7 +49,7 @@
 				<i class="fa fa-cloud-upload text-center" aria-hidden="true"></i>
 			</div>
 			<div class="typeUpload" style="width:100%">
-				<div class="btnGroup">
+				<!-- <div class="btnGroup">
 					<a class="btn dropdown-toggle parenttitle2" data-toggle="dropdown"
 						href="#"> 请选择父类构件（例如：建筑） <span class="caret"></span>
 					</a>
@@ -71,8 +71,8 @@
 					</a>
 					<ul class="dropdown-menu secondchild-menu2">
 					</ul>
-				</div>
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				</div> -->
+				<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				    <div class="modal-dialog">
 				        <div class="modal-content">
 				            <div class="modal-header">
@@ -84,9 +84,9 @@
 				                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				                <button type="button" class="btn btn-primary" data-dismiss="modal" id="subThirdType">提交更改</button>
 				            </div>
-				        </div><!-- /.modal-content -->
-				    </div><!-- /.modal -->
-				</div>
+				        </div>/.modal-content
+				    </div>/.modal
+				</div> -->
 			</div>
 			<div class="menu-container">
 				<div class="btnGroup">
@@ -142,14 +142,6 @@
 									name="inputVERSION">
 							</div>
 						</div>
-
-						<!-- <div class="control-group">
-				    <label class="control-label" for="inputCLASSIFY">构件分类</label>
-				    <div class="controls">
-				      <input type="text" id="inputCLASSIFY" placeholder="CLASSIFY" name="inputCLASSIFY">
-				    </div>
-				  </div> -->
-
 						<div class="control-group">
 							<label class="control-label" for="inputSIGN">构件标签</label>
 							<div class="controls">

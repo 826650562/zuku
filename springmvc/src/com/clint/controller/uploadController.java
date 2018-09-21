@@ -137,7 +137,6 @@ public class uploadController {
 			this.mapService.execute(filesql);
 			obj.put("success", "上传成功");
 		}
-		// System.out.println("执行到这啦");
 		try {
 			reponse.getWriter().write(String.valueOf(obj));
 		} catch (Exception e) {

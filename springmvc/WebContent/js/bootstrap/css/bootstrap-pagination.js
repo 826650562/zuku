@@ -186,7 +186,7 @@ var BootstrapPagination = function (obj, option) {
         }
 
         // 创建页码输入框。
-        this.createPageInput = function () {
+       /* this.createPageInput = function () {
             var li = $('<li></li>');
             var inputgroup = $('<div class="input-group page-input"></div>');
             li.append(inputgroup);
@@ -207,7 +207,7 @@ var BootstrapPagination = function (obj, option) {
             //        <button type="button" class="btn btn-default">GO</button>
             //    </div>
             return li;
-        }
+        }*/
 
         // 延迟计时器ID，这个延迟计时器用于延迟执行用户输入跳转页码的工作。
         this.timeoutId = 0;
