@@ -15,16 +15,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=path %>/js/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css">
 <link href="<%=path %>/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
-<link href="<%=path %>/js/bootstrap/css/bootstrap-pagination.min.css" rel="stylesheet" type="text/css" />
 <script>
  window.path="<%=path %>"
 </script>
 <script src="<%=path %>/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="<%=path %>/js/bootstrap/js/bootstrap.min.js"></script>
-<script src="<%=path %>/js/bootstrap/css/bootstrap-pagination.min.js"></script>
 <script src="<%=path %>/js/index.js"></script>
-
-
+<script src="<%=path %>/js/homedetail.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -104,12 +100,9 @@ $(function(){
 		<div class="col-lg-2 dataitemcont"></div>
 	</div>
 </div>
-<nav>
-    <ul id="demo1" class="pagination">
-    </ul>
-</nav> 
+
 <div class="col-lg-12">
-<!-- <div class="pagebox">
+<div class="pagebox">
     <a class="prev disable hide" href="javascript:;"><i class="fa fa-angle-left"></i></a>
     <a href="javascript:;" class="page-item  pageactive">1</a>
     <a href="javascript:;" class="page-item ">2</a>
@@ -120,7 +113,7 @@ $(function(){
     <a href="javascript:;">7</a>
     <a class="next" href="javascript:;">&nbsp;<i class="fa fa-angle-right"></i></a>
     </div>
-</div> -->
+</div>
 <footer>
 <div class="container">
   <div class="row">

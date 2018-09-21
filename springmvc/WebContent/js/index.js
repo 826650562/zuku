@@ -25,7 +25,7 @@ $(function(){
   
   // 父类点击事件
   function parentClick(){
-	  $(".ptcgJsItem").click(function(){
+	  $(".ptcgJsItem").unbind().click(function(){
 		  //绿色框样式操作
 		  //1.清楚所有的active
 		  $(".ptcgJsItem").removeClass("ptcgJsItemActive");
@@ -42,7 +42,7 @@ $(function(){
 					async : false,
 					cache : false,
 				    data : {
-						_id : id //传出父类
+						_id : id
 					}, 
 					contentType : "application/x-www-form-urlencoded",
 					success : function(data) {
@@ -87,98 +87,35 @@ $(function(){
   
   //显示前端列表
   function showimglist(){
-	  
-	$('.ptcgJsItem').click(function(){
-		var id = $(this).attr("_id");
-		console.log(id);
-		//调取数据库中上传文件及内容
-			  $.ajax({
-		           type: "POST",
-		           url: window.path+"/home/getContent",
-		           dataType: "json",
-		           data:{
-		        	   _id : id, //传出父类
-		        	   pageSize:20,
-		           	   pageIndex:1
-		           },
-		           success: function(data){
-								console.log(data);
-								
-								for(var i =0;i<data.length;i++){
-									var html = '<div class="dataitemouter">'
-										 
-									    +'<div class="col-lg-12 dataimg">'
-									      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
-									    +'</div>'
+	//调取数据库中上传文件及内容
+	 	$.ajax({
+           type: "POST",
+           url: window.path+"/home/getContent",
+           dataType: "json",
+           success: function(data){
+						console.log(data);
+						
+						for(var i =0;i<data.length;i++){
+							var html = '<div class="dataitemouter">'
+								 
+							    +'<div class="col-lg-12 dataimg">'
+							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
+							    +'</div>'
 
-									    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
-									    +'<div class="col-lg-12 text-center">'
-									      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
-									    +'</div>'
+							    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
+							    +'<div class="col-lg-12 text-center">'
+							      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
+							    +'</div>'
 
-									+'</div>';
-									$(".dataitemcont"). append(html);
-									$('.rfadetail').unbind().click(function(){
-										var id=$(this).attr('data-id');
-							            window.location.href= window.path +'/home/homedetail?id='+id;
-									})
-								}
-		                    }
-		       });
-	})
-	 	
-  }
-  
-  //实现首页分页功能
-  function pageinationchange(){
-	  $(function () {
-	        var demo1 = BootstrapPagination($("#demo1"), {
-	            //记录总数。
-	            total: 101,
-	            //当前页索引编号。从其开始（从0开始）的整数。
-	            pageIndex: 0,
-	            //当分页更改后引发此事件。
-	            pageChanged: function (pageIndex, pageSize) {
-	                /*alert("page changed. pageIndex:" + pageIndex + ",pageSize:" + pageSize)*/
-	            	/*alert("page changed. pageIndex:" + pageIndex + ",pageSize:" + 15)*/
-	            	$.ajax({
-	    	            type: "POST",
-	    	            url: window.path+"/home/getContent",
-	    	            dataType: "json",
-	    	            data: {
-	    	            	pageSize:pageSize,
-	    	            	pageIndex:Number(pageIndex)+1,
-	    	            	
-	    	            },
-	    	            success: function(data){
-	    	 						console.log(data);
-	    	 						$(".dataitemcont").html('');
-	    	 						for(var i =0;i<data.length;i++){
-	    	 							var html = '<div class="dataitemouter">'
-	    	 								 
-	    	 							    +'<div class="col-lg-12 dataimg">'
-	    	 							      +'<img src="'+window.path+'/rfa-img/'+ data[i].SLT_PATH+'">'
-	    	 							    +'</div>'
-
-	    	 							    +'<div class="col-lg-12 dataItemTxtsmall">'+ data[i].NAME +'</div>'
-	    	 							    +'<div class="col-lg-12 text-center">'
-	    	 							      +'<a class="btn btn-info rfadetail" data-id="'+data[i].ID+'">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>'
-	    	 							    +'</div>'
-
-	    	 							+'</div>';
-	    	 							$(".dataitemcont"). append(html);
-	    	 							$('.rfadetail').unbind().click(function(){
-	    	 								var id=$(this).attr('data-id');
-	    	 					            window.location.href= window.path +'/home/homedetail?id='+id;
-	    	 							})
-	    	 						}
-	    	                     }
-	    	        });
-	            },
-	        });
-	        
-	        
-	    });
+							+'</div>';
+							$(".dataitemcont"). append(html);
+							$('.rfadetail').unbind().click(function(){
+								var id=$(this).attr('data-id');
+					            window.location.href= window.path +'/home/homedetail?id='+id;
+							})
+						}
+                    }
+       });
   }
   
   
@@ -186,6 +123,5 @@ $(function(){
   getParentType(); //获取父类
   parentClick(); //执行父类点击事件
   showimglist(); //显示前端列表
-  pageinationchange(); //分页功能
 	
 })

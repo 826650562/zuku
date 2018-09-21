@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -79,19 +80,19 @@ public class uploadController {
 
 		List<MultipartFile> files = new ArrayList<MultipartFile>();
 
-		List<MultipartFile> files1 = multipartRequest.getFiles("imgfile");
-		List<MultipartFile> files2 = multipartRequest.getFiles("rfafile");
+		List<MultipartFile> files1 = multipartRequest.getFiles("file");
+		//List<MultipartFile> files2 = multipartRequest.getFiles("rfafile");
 
 		MultipartFile f1 = files1.get(0);
-		MultipartFile f2 = files2.get(0);
+		//MultipartFile f2 = files2.get(0);
 
 		if (f1 != null) {
 			files.add(f1);
 		}
 
-		if (f2 != null) {
+		/*if (f2 != null) {
 			files.add(f2);
-		}
+		}*/
 
 		String leftPath = "";
 		String temperimgpath = "";
@@ -111,7 +112,9 @@ public class uploadController {
 				if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
 					leftPath = session.getServletContext().getRealPath("/rfa-img");
 					temperimgpath = leftPath; // 路径
-					temperimgname = fileName; // 名称					
+					temperimgname = fileName; // 名称	
+					obj.put("imgSrc", temperimgpath);
+					obj.put("imgName", temperimgname);
 				}
 				if (fileName.endsWith("rfa")) {
 					leftPath = session.getServletContext().getRealPath("/rfa");
@@ -120,8 +123,9 @@ public class uploadController {
 					Long size = file.getSize();
 					int sizeInt = Integer.parseInt(String.valueOf(size));
 					sizeKb = (sizeInt / 1024) + "kb";
+					obj.put("rfaName", temperrfaname);
+					obj.put("sizeKb", sizeKb);
 				}
-
 				File filetest = new File(leftPath, fileName);
 				if (!filetest.getParentFile().exists()) {
 					filetest.getParentFile().mkdirs();
@@ -129,12 +133,6 @@ public class uploadController {
 				file.transferTo(filetest);
 
 			}
-
-			// 将图片路径与rfa文件路径存入数据库
-			String uuid = (String) request.getSession().getAttribute("uuid");
-			filesql = "update T_ZUKU_DETAIL  SET RFA_PATH = '" + temperrfaname + "',SLT_PATH = '" + temperimgname
-					+ "',RFASIZE='" + sizeKb + "' WHERE ID = '" + uuid + "'";
-			this.mapService.execute(filesql);
 			obj.put("success", "上传成功");
 		}
 		try {
@@ -154,20 +152,35 @@ public class uploadController {
 		String RFAname = req.getParameter("_name");
 		String RFAversion = req.getParameter("_version");
 		String RFAsign = req.getParameter("_sign");
-		String RFId = req.getParameter("_getId");
+		String thirdTypeId = req.getParameter("thirdTypeId");
+		String rfaName = req.getParameter("rfaName");
+		String imgName = req.getParameter("imgName");
+		String sizeKb = req.getParameter("sizeKb");
+		String secondTypeId = req.getParameter("secondTypeId");
+		String firstTypeId =  req.getParameter("firstTypeId");
 		String uuid = UUID.randomUUID().toString();
-
-		String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN,Parent_id) values('" + uuid + "','" + RFAname
-				+ "','" + RFAversion + "','" + RFAsign + "','" + RFId + "')";
-		try {
-			this.mapService.execute(Info);
-			req.getSession().setAttribute("uuid", uuid);
-
-			reponse.getWriter().write("uploadSuccess");
+		JSONObject obj = new JSONObject();
+		
+		if(StringUtils.hasText(RFAname)){
+			int count = this.mapService.countAll("select count(*) from T_ZUKU_DETAIL where NAME='"+ RFAname  +"' and Parent_id='"+ thirdTypeId +"'");
+			if(count>0){
+				obj.put("uploadError", "该构件已存在！");
+			}else{
+				String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN,Parent_id,RFA_PATH,SLT_PATH,RFASIZE,GRANDPARENT_ID,GREATGRANDFATHER_ID) values('" + uuid + "','" + RFAname
+						+ "','" + RFAversion + "','" + RFAsign + "','" + thirdTypeId +"','" + rfaName +"','" + imgName +"','" + sizeKb +"','" + secondTypeId+ "','" + firstTypeId + "')";
+				this.mapService.execute(Info);
+				obj.put("uploadSuccess", "构件信息上传成功！");
+			}			
+		}else{
+			obj.put("uploadError", "构件信息上传失败！");
+		}
+		//向数据库插入详情sql语句		
+		try {			
+			req.getSession().setAttribute("uuid", uuid);			
+			reponse.getWriter().write(String.valueOf(obj));
 		} catch (Exception e) {
 			reponse.getWriter().write(e.toString());
 		}
-
 	}
 	
 	/*
@@ -178,18 +191,46 @@ public class uploadController {
 	public void setThirdType(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
 		String type = req.getParameter("type");
 		String parentId = req.getParameter("parentId");
-		String Info = "insert into T_ZUKU_CLASSIFY(id,PARENT_ID,CLASS_NAME) values(SEQ_NO.nextVal,'" + parentId
-				+ "','"  + type + "')";		
-		try {
+		String Info ="";
+		if(StringUtils.hasText(type)&&StringUtils.hasText(parentId)){
+			Info = "insert into T_ZUKU_CLASSIFY(id,PARENT_ID,CLASS_NAME) values(SEQ_NO.nextVal,'" + parentId
+					+ "','"  + type + "')";	
 			this.mapService.execute(Info);
-			JSONObject obj = new JSONObject();
-			obj.put("success", "添加自定义类别项成功！");				
+		}
+		List hasType = this.mapService.getListBySql("select * from T_ZUKU_CLASSIFY where CLASS_NAME='"+ type +"' and PARENT_ID='"+ parentId +"'");
+		JSONObject obj = new JSONObject();
+		if(hasType.size()>0){
+			obj.put("success", "添加自定义类别项成功！");	
+		}	else{
+			obj.put("error", "添加自定义类别项失败！");	
+		}
+		try {									
 			reponse.getWriter().write(String.valueOf(obj));
 		} catch (Exception e) {
 			reponse.getWriter().write(e.toString());
 		}
-
-	}
+	}	
 	
-
+	//删除第三级菜单 delThirdType
+	@RequestMapping(value = "/delThirdType")
+	public void delThirdType(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
+		String typeId = req.getParameter("typeId");
+		String Info ="";
+		if(StringUtils.hasText(typeId)){
+			Info = "delete from T_ZUKU_CLASSIFY where id='" + typeId + "'";	
+			this.mapService.execute(Info);
+		}
+		List hasType = this.mapService.getListBySql("select * from T_ZUKU_CLASSIFY where id='"+ typeId +"'");
+		JSONObject obj = new JSONObject();
+		if(hasType.size()<=0){
+			obj.put("success", "删除类别成功！");	
+		}	else{
+			obj.put("error", "删除类别失败！");	
+		}
+		try {									
+			reponse.getWriter().write(String.valueOf(obj));
+		} catch (Exception e) {
+			reponse.getWriter().write(e.toString());
+		}
+	}	
 }
