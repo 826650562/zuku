@@ -99,6 +99,77 @@ public class homeController {
 	}
 	
 	/*
+	 *  
+	 * */
+	@RequestMapping(value = "/questTypeBygrandprentid")
+	public void questTypeBygrandprentid(HttpServletRequest req,HttpServletResponse reponse) {
+		String id=req.getParameter("_id");
+		String pageIndex=req.getParameter("_pageIndex");
+		String pageSize=req.getParameter("_pageSize");
+		
+		int page = Integer.parseInt(pageIndex);
+		int pageSizeInt = Integer.parseInt(pageSize);
+		int startInt = (page-1)*pageSizeInt;
+		int endInt = pageSizeInt*page;
+		
+	    String sqlfenye=	 "select a1.* from (select t_zuku_detail.*,rownum rn from t_zuku_detail where rownum <="+endInt+") a1 where rn >="+startInt;
+		 
+		String count =  "select count(*) from t_zuku_detail where GREATGRANDFATHER_ID = '"+id+"'";
+		
+		int _total= this.mapService.countAll(count);
+		
+	    List parentIdList = this.mapService.getListBySql(sqlfenye);
+	   
+	    Map res=new HashMap();
+	    res.put("_total", _total);
+	    res.put("list", parentIdList);
+	   
+	    JSONArray json = JSONArray.fromObject(res);
+		     try {
+			  PrintWriter  pw =	reponse.getWriter();
+			  pw.write(String.valueOf(json));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
+	/*
+	 * 通过grandprentid获取相应列表，通过曾祖父筛选顶级列表项
+	 * */
+	@RequestMapping(value = "/questTypeByPparentid")
+	public void questTypeByPparentid(HttpServletRequest req,HttpServletResponse reponse) {
+		String id=req.getParameter("_id");
+		String parentId =  "select * from t_zuku_detail where GRANDPARENT_ID = '"+id+"'";
+		 List parentIdList = this.mapService.getListBySql(parentId);
+		    JSONArray json = JSONArray.fromObject(parentIdList);
+		     try {
+			  PrintWriter  pw =	reponse.getWriter();
+			  pw.write(String.valueOf(json));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
+	/*
+	 * 通过grandprentid获取相应列表，通过曾祖父筛选顶级列表项
+	 * */
+	@RequestMapping(value = "/questTypeByparentid")
+	public void questTypeByparentid(HttpServletRequest req,HttpServletResponse reponse) {
+		String id=req.getParameter("_id");
+		String parentId =  "select * from t_zuku_detail where PARENT_ID = '"+id+"'";
+		 List parentIdList = this.mapService.getListBySql(parentId);
+		    JSONArray json = JSONArray.fromObject(parentIdList);
+		     try {
+			  PrintWriter  pw =	reponse.getWriter();
+			  pw.write(String.valueOf(json));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
+	
+	
+	/*
 	 * 		将数据库里面获取的数据显示到前台
 	 * */
 	@RequestMapping(value = "/getContent")
