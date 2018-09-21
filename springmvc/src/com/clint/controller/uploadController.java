@@ -155,10 +155,12 @@ public class uploadController {
 		String RFAversion = req.getParameter("_version");
 		String RFAsign = req.getParameter("_sign");
 		String RFId = req.getParameter("_getId");
+		String RFAGrandparentId = req.getParameter("_GrandparentId");
+		String RFAGreatgrandparentId = req.getParameter("_GreatgrandparentId");
 		String uuid = UUID.randomUUID().toString();
 
-		String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN,Parent_id) values('" + uuid + "','" + RFAname
-				+ "','" + RFAversion + "','" + RFAsign + "','" + RFId + "')";
+		String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN,Parent_id,GRANDPARENT_ID,GREATGRANDFATHER_ID) values('" + uuid + "','" + RFAname
+				+ "','" + RFAversion + "','" + RFAsign + "','" + RFId + "','" + RFAGrandparentId + "','" + RFAGreatgrandparentId + "')";
 		try {
 			this.mapService.execute(Info);
 			req.getSession().setAttribute("uuid", uuid);
