@@ -19,8 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  window.path="<%=path %>"
 </script>
 <script src="<%=path %>/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<link href="<%=path %>/js/bootstrap/css/bootstrap-pagination.min.css" rel="stylesheet" type="text/css">
+<script src="<%=path %>/js/bootstrap/css/bootstrap-pagination.min.js" type="text/javascript"></script>
 <script src="<%=path %>/js/index.js"></script>
-<script src="<%=path %>/js/homedetail.js"></script>
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,71 +72,48 @@ $(function(){
         <div class="col-lg-12">
            <a class="ptcgJsItem  ptcgJsItemActive">全部专业</a>
            <div class="parentType">
-                <!-- 插入父类数据 -->
+                <!-- 显示一级菜单 -->
            </div>
         </div>
       </div>
     </div>
 </div>
 </div>
+
+<!-- 显示二级菜单以及三级菜单 -->
+<div class="container-fluid padT15">
+<div class="container padLR7">
+<div class="row">
+  <div class="col-lg-12 fenlei">
+  </div>
+ <!--  <div class="col-lg-12">
+     <div class="z-row togglebtnbox"><div class="z-col"><a class="btn btn-default togglebtn">点击展开<i class="fa fa-caret-down fa-fw"> </i></a></div></div>----切换按钮----
+  </div>  -->
+</div>
+</div>
+</div>
+<!-- 显示二级菜单以及三级菜单结束 -->
+
+<!-- 显示构件列表 -->
 <div class="container-fluid">
 <div class="container">
-<div class="row"  id="listBox">
-<!---->
-<div class="col-lg-2 dataitemcont">
-<div class="dataitemouter">
- <div class="dataItem">
- <div class="row">
-    <div class="col-lg-12 dataimg">
-      <img src="<%=basePath %>images/mximg1.png">
-    </div>
- </div>
- <div class="row">
-    <div class="col-lg-12 dataItemTxtsmall">带回风箱的风机盘管机组 - 卧式 - DX - 后回风</div>
-    <div class="col-lg-12 text-center">
-      <a href="datadetail.html" class="btn btn-info">查看详情&nbsp;<i class="fa fa-long-arrow-right fa-fw"> </i></a>
-    </div>
- </div>
- </div>
+<div class="row" id="listBox"></div>
 </div>
 </div>
-<!---->
-</div>
-</div>
-</div>
-<!-- <div class="container-fluid padT15">
-<div class="container padLR7" id="firstChildType">
-待会删
-<div class="row">
-  <div class="col-lg-12 fenlei"> 
-  </div>
-  <div class="col-lg-12">
-     <div class="z-row togglebtnbox"><div class="z-col"><a class="btn btn-default togglebtn">点击展开<i class="fa fa-caret-down fa-fw"> </i></a></div></div>----切换按钮----
-  </div> 
-</div>
-待会删
-</div>
-</div> -->
+<!-- 显示构件列表结束 -->
+<!-- 分页功能 -->
+<nav id="pagechange">
+    <ul id="pagination" class="pagination" data-total="101" data-pageindex="1" data-pagesize="20" data-pagegroupsize="5"
+        data-leftformatestring="本页{count}条记录/共{total}条记录"
+        data-rightformatestring="第{pageNumber}页/共{totalPages}页"
+        data-pagenumberformatestring="{pageNumber}"
+        data-prevpagetext="上一页" data-nextpagetext="下一页"
+        data-firstpagetext="首页" data-lastpagetext="尾页"
+        data-pagechanged='function (pageIndex, pageSize) {alert("page changed. pageIndex:" + pageIndex + ",pageSize:" + pageSize);};'
+        data-layoutscheme="lefttext,pagesizelist,firstpage,prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage,lastpage,pageinput,righttext">
+    </ul>
+</nav>
 
-<div class="container-fluid">
-	<div class="container">
-		<div class="col-lg-2 dataitemcont"></div>
-	</div>
-</div>
-
-<div class="col-lg-12">
-<div class="pagebox">
-    <a class="prev disable hide" href="javascript:;"><i class="fa fa-angle-left"></i></a>
-    <a href="javascript:;" class="page-item  pageactive">1</a>
-    <a href="javascript:;" class="page-item ">2</a>
-    <a href="javascript:;" class="page-item ">3</a>
-    <a href="javascript:;" class="page-item ">4</a>
-    <a href="javascript:;" class="page-item ">5</a>
-    <span>...</span>
-    <a href="javascript:;">7</a>
-    <a class="next" href="javascript:;">&nbsp;<i class="fa fa-angle-right"></i></a>
-    </div>
-</div>
 <footer>
 <div class="container">
   <div class="row">

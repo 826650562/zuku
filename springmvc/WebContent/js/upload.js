@@ -97,9 +97,9 @@ $(function() {
 						dataType:'JSON',
 						success:function(res){
 							if(res.success){
-								alert(res.success);
+								layer.msg(res.success);
 							}else if(res.error){
-								alert(res.error);
+								layer.msg(res.error);
 							}
 							vm.secondTypeChange(vm.secondChoosedId);
 						},
@@ -121,9 +121,9 @@ $(function() {
 					success:function(res){
 						if(res.success){
 							vm.secondTypeChange(vm.secondChoosedId);
-							alert(res.success);							
+							layer.msg(res.success);							
 						}else if(res.error){
-							alert(res.error);
+							layer.msg(res.error);
 						}
 					},
 					error:function(res){
@@ -151,9 +151,9 @@ $(function() {
 						dataType:'JSON',
 						success : function(res) {
 							if (res.uploadSuccess) {
-								alert(res.uploadSuccess);
+								layer.msg(res.uploadSuccess);
 							}else if(res.uploadError){
-								alert(res.uploadError);
+								layer.msg(res.uploadError);
 							}
 						},
 						error : function(e) {
@@ -161,21 +161,21 @@ $(function() {
 						}
 					})
 				}else if(!this.firstChoosedId){
-					alert('请选择一级分类!');
+					layer.msg('请选择一级分类!');
 				}else if(!this.secondChoosedId){
-					alert('请选择二级分类!');
+					layer.msg('请选择二级分类!');
 				}else if(!this.thirdChoosedId){
-					alert('请选择三级分类!');
+					layer.msg('请选择三级分类!');
 				}else if(!this.imgName){
-					alert('请上传缩略图!');
+					layer.msg('请上传缩略图!');
 				}else if(!this.rfaName){
-					alert('请上传rfa文件!');
+					layer.msg('请上传rfa文件!');
 				}else if(!$("#detailName").val()){
-					alert('请填写构件名称!');
+					layer.msg('请填写构件名称!');
 				}else if(!$("#detailVersion").val()){
-					alert('请填写构件revit版本!');
+					layer.msg('请填写构件revit版本!');
 				}else if(!$("#detailTag").val()){
-					alert('请填写构件标签!');
+					layer.msg('请填写构件标签!');
 				}
 			}
 		}
@@ -332,7 +332,7 @@ $(function() {
 			dataType:'JSON',
 			success:function(res) {
 				if(res=='uploadSuccess'){
-					alert("上传成功！");
+					layer.msg("上传成功！");
 				}
 			},
 			error:function(res) {console.log('e'+res)}
@@ -380,7 +380,7 @@ $(function() {
 				type:'POST',
 				success:function(res){
 					if(res.success){
-						alert(res.success);
+						layer.msg(res.success);
 						setThirdTypeMenu(parentId,"2");
 					}
 				},
