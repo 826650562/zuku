@@ -178,20 +178,6 @@ public class uploadController {
 		try {			
 			req.getSession().setAttribute("uuid", uuid);			
 			reponse.getWriter().write(String.valueOf(obj));
-
-		/*String RFId = req.getParameter("_getId");
-		String RFAGrandparentId = req.getParameter("_GrandparentId");
-		String RFAGreatgrandparentId = req.getParameter("_GreatgrandparentId");
-		String uuid = UUID.randomUUID().toString();
-
-		String Info = "insert into T_ZUKU_DETAIL(ID,NAME,VERSION,SIGN,Parent_id,GRANDPARENT_ID,GREATGRANDFATHER_ID) values('" + uuid + "','" + RFAname
-				+ "','" + RFAversion + "','" + RFAsign + "','" + RFId + "','" + RFAGrandparentId + "','" + RFAGreatgrandparentId + "')";
-		try {
-			this.mapService.execute(Info);
-			req.getSession().setAttribute("uuid", uuid);
-
-			reponse.getWriter().write("uploadSuccess");*/
-
 		} catch (Exception e) {
 			reponse.getWriter().write(e.toString());
 		}
