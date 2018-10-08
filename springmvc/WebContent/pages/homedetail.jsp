@@ -23,7 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 </script>
 <script type="text/javascript" src="<%=path %>/js/bootstrap/js/bootstrap.min.js"></script>
-<script src="<%=path %>/js/homedetail.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -107,7 +106,7 @@ $(function(){
               <span>分类：</span><c:out value="${content.CLASSIFY}"/><br/>
               <span>标签：</span><c:out value="${content.SIGN}"/>
            </div>
-           <button class="btn btn-success"> <a href="<%=basePath %>rfa/<c:out value="${content.RFA_PATH}"/>" download="rfa构件文件">下载rfa构件文件</a></button>
+           <button class="btn btn-success"> <a href="<%=basePath %>rfa/<c:out value="${content.RFA_PATH}"/>" download="rfa构件文件" style="color:white">下载rfa构件文件</a></button>
          </div>
      </div>
   
